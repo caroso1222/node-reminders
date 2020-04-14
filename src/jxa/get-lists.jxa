@@ -1,0 +1,9 @@
+function main() {
+  const reminders = Application('Reminders');
+  return reminders.lists().map(list => ({
+    name: list.name(),
+    id: list.id()
+  }))
+}
+
+console.log(JSON.stringify(main()));

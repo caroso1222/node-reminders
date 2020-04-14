@@ -1,0 +1,26 @@
+// Parse the input. Input args come as an object. {foo: bar, baz: gem}
+var _args = $.NSProcessInfo.processInfo.arguments
+const args = JSON.parse(ObjC.unwrap(_args.objectAtIndex(_args.count - 1)));
+
+/**
+ * @pre - the reminder id comes in the args input as 'id' and the data as 'data':
+ * e.g. { id: '1234', data: { name: 'do this', remindeMeDate: '2020-04-13T16:40:09.175Z' } }
+ */
+function main() {
+  const reminders = Application('Reminders');
+  const { id, data } = args;
+  const reminder = reminders.reminders.byId(id);
+
+  // Convert date strings into date objects
+  const dateProps = ['completionDate', 'creationDate', 'dueDate', 'modificationDate', 'remindMeDate'];
+  for (prop in data) {
+    if (dateProps.indexOf(prop) !== -1) {
+      data[prop] = new Date(data[prop]);
+    }
+    reminder[prop] = data[prop];
+  }
+
+  return reminder.id();
+}
+
+console.log(JSON.stringify(main()));

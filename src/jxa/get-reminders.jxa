@@ -1,0 +1,35 @@
+// Parse the input. Input args come as an object. {foo: bar, baz: gem}
+var _args = $.NSProcessInfo.processInfo.arguments
+const args = JSON.parse(ObjC.unwrap(_args.objectAtIndex(_args.count - 1)));
+
+/**
+ * @pre - the list id comes in the args input as 'id'. e.g. { id: '1234' }
+ */
+function main() {
+  const reminders = Application('Reminders');
+  const list = reminders.lists.byId(args.id).reminders;
+  const props = args.props || [ 'name', 'body', 'id', 'completed', 'completionDate', 'creationDate', 
+                  'dueDate', 'modificationDate', 'remindMeDate', 'priority' ];
+  // We could traverse all reminders and for each one get the all the props.
+  // This is more inefficient than calling '.name()' on the very reminder list. It requires
+  // less function calls.
+  const propFns = props.reduce((obj, prop) => {
+    obj[prop] = list[prop]();
+    return obj;
+  }, {});
+  const finalList = [];
+
+  // Flatten the object {name: string[], id: string[]} to an array of form
+  // [{name: string, id: string}, ..., {name: string, id: string}] which represents the list
+  // of reminders
+  for (let i = 0; i < propFns.name.length; i++) {
+    const reminder = props.reduce((obj, prop) => {
+      obj[prop] = propFns[prop][i];
+      return obj;
+    }, {});
+    finalList.push(reminder)
+  }
+  return finalList;
+}
+
+console.log(JSON.stringify(main()));

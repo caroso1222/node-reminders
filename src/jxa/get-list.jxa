@@ -1,0 +1,14 @@
+// Parse the input. Input args come as an object. {foo: bar, baz: gem}
+var _args = $.NSProcessInfo.processInfo.arguments
+const args = JSON.parse(ObjC.unwrap(_args.objectAtIndex(_args.count - 1)));
+
+/**
+ * @pre - the list id comes in the args input as 'id'. e.g. { id: '1234' }
+ */
+function main() {
+  const reminders = Application('Reminders');
+  const list = reminders.lists.byId(args.id);
+  return { name: list.name(), id: list.id() };
+}
+
+console.log(JSON.stringify(main()));

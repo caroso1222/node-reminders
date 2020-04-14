@@ -1,0 +1,19 @@
+// Parse the input. Input args come as an object. {foo: bar, baz: gem}
+var _args = $.NSProcessInfo.processInfo.arguments
+const args = JSON.parse(ObjC.unwrap(_args.objectAtIndex(_args.count - 1)));
+
+/**
+ * @pre - the data comes in the args input as 'data':
+ * e.g. { data: { name: 'new list name' } }
+ */
+function main() {
+  const reminders = Application('Reminders');
+  const newList = reminders.List(args.data);
+
+  // This works correctly on .applescript but it throws error with .jxa.
+  // It's weird, but it creates the list anyways, so we're ignoring the error.
+  try { reminders.lists.push(newList) } catch(e) {}
+  return true;
+}
+
+console.log(JSON.stringify(main()));
