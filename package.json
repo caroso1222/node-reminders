@@ -53,8 +53,7 @@
     "node": ">=8.9"
   },
   "dependencies": {
-    "execa": "^4.0.0",
-    "sha.js": "^2.4.11"
+    "execa": "^4.0.0"
   },
   "devDependencies": {
     "@bitjson/npm-scripts-info": "^1.0.0",
@@ -81,6 +80,9 @@
     "failFast": true,
     "files": [
       "build/main/**/*.spec.js"
+    ],
+    "sources": [
+      "build/main/**/*.js"
     ]
   },
   "config": {
@@ -89,7 +91,8 @@
     }
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",

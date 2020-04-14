@@ -16,7 +16,10 @@ export async function createList(data: Omit<List, 'id'>): Promise<string> {
   return lists[lists.length - 1].id;
 }
 
-export function getReminders(listId: string, props?: ReadonlyArray<keyof Reminder>): Promise<readonly Reminder[]> {
+export function getReminders(
+  listId: string,
+  props?: ReadonlyArray<keyof Reminder>
+): Promise<readonly Reminder[]> {
   return execJXA(JXA_SCRIPTS.getReminders, { id: listId, props });
 }
 

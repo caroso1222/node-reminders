@@ -28,7 +28,9 @@
       true,
       { "ignore-prefix": ["console.", "process.exit"] }
     ],
-    "no-if-statement": true
+    "no-if-statement": true,
     /* end tslint-immutable rules */
+    
+    "no-console": false
   }
 }

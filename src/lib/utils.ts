@@ -16,14 +16,16 @@ export const JXA_SCRIPTS = {
   getReminder: jxaPath('get-reminder'),
   getReminders: jxaPath('get-reminders'),
   updateReminder: jxaPath('update-reminder'),
-}
+};
 
 export async function execJXA<T, R>(scriptPath: string, data?: R): Promise<T> {
-  const { stderr } = await execa('osascript', [
-      '-l',
-      'JavaScript',
-      scriptPath,
-      JSON.stringify(data)
-    ]);
+  const prefix = process.env.NODE_ENV === 'test' ? 'test' : '';
+
+  const { stderr } = await execa(prefix + 'osascript', [
+    '-l', //
+    'JavaScript',
+    scriptPath,
+    JSON.stringify(data),
+  ]);
   return JSON.parse(stderr);
 }
