@@ -5,7 +5,7 @@ export function getLists(): Promise<readonly List[]> {
   return execJXA(JXA_SCRIPTS.getLists);
 }
 
-export function getList(id: string): Promise<readonly List[]> {
+export function getList(id: string): Promise<List> {
   return execJXA(JXA_SCRIPTS.getList, { id });
 }
 
@@ -23,7 +23,10 @@ export function getReminders(
   return execJXA(JXA_SCRIPTS.getReminders, { id: listId, props });
 }
 
-export function getReminder(reminderId: string, props?: ReadonlyArray<keyof Reminder>): Promise<Reminder> {
+export function getReminder(
+  reminderId: string,
+  props?: ReadonlyArray<keyof Reminder>
+): Promise<Reminder> {
   return execJXA(JXA_SCRIPTS.getReminder, { id: reminderId, props });
 }
 
@@ -31,10 +34,13 @@ export function updateReminder(id: string, data: Partial<Reminder>): Promise<str
   return execJXA(JXA_SCRIPTS.updateReminder, { id, data });
 }
 
-export function deleteReminder(id: string): Promise<boolean> {
+export function deleteReminder(id: string): Promise<true> {
   return execJXA(JXA_SCRIPTS.deleteReminder, { id });
 }
 
-export function createReminder(listId: string, data: Partial<Omit<Reminder, 'id'>>): Promise<string> {
+export function createReminder(
+  listId: string,
+  data: Partial<Omit<Reminder, 'id'>>
+): Promise<string> {
   return execJXA(JXA_SCRIPTS.createReminder, { listId, data });
 }

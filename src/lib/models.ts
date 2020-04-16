@@ -9,7 +9,6 @@ export interface Reminder {
   readonly id: string;
   readonly completed: boolean;
   readonly completionDate: Date;
-  readonly list: List;
   readonly creationDate: Date;
   readonly dueDate: Date;
   readonly modificationDate: Date;

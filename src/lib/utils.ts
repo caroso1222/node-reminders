@@ -27,5 +27,6 @@ export async function execJXA<T, R>(scriptPath: string, data?: R): Promise<T> {
     scriptPath,
     JSON.stringify(data),
   ]);
+
   return JSON.parse(stderr);
 }
