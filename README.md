@@ -82,7 +82,7 @@ Creates a reminder in a list and resolves with its ID. See [example](#create-rem
 #### Get Lists
 
 ```typescript
-import { getLists, getList, createList } from 'node-reminders';
+import { getLists } from 'node-reminders';
 
 (async () => {
   const lists = await getLists();
@@ -100,7 +100,7 @@ import { getLists, getList, createList } from 'node-reminders';
 #### Get List
 
 ```typescript
-import { getLists, getList, createList } from 'node-reminders';
+import { getList } from 'node-reminders';
 
 (async () => {
   const list = await getList('2480C298-017A-11EB-BBBF-CB4F4FDF3602');
