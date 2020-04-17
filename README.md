@@ -1,6 +1,6 @@
 # node-reminders
 
-A NodeJS and TypeScript wrapper for the OSX Reminders App.
+A NodeJS and TypeScript wrapper for the macOS Reminders App.
 
 - 🔥 Easy to use interface to create, retrieve, update and delete lists and reminders
 - 👾 CommonJS and ES6 modules
