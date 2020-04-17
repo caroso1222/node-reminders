@@ -290,7 +290,3 @@ Under the hood, this library is an interface to run [JXA](https://developer.appl
 # Licence
 
 MIT © [Carlos Roso](https://carlosroso.com/)
-
-# TODO
-
-Are dates returned as Date objects?
