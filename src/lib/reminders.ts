@@ -1,5 +1,5 @@
 import { List, Reminder } from './models';
-import { execJXA, JXA_SCRIPTS } from './utils';
+import { execJXA, JXA_SCRIPTS, withParsedDates } from './utils';
 
 export function getLists(): Promise<readonly List[]> {
   return execJXA(JXA_SCRIPTS.getLists);
@@ -16,18 +16,23 @@ export async function createList(data: Omit<List, 'id'>): Promise<string> {
   return lists[lists.length - 1].id;
 }
 
-export function getReminders(
+export async function getReminders(
   listId: string,
   props?: ReadonlyArray<keyof Reminder>
 ): Promise<readonly Reminder[]> {
-  return execJXA(JXA_SCRIPTS.getReminders, { id: listId, props });
+  const reminders = await execJXA<readonly Reminder[]>(JXA_SCRIPTS.getReminders, {
+    id: listId,
+    props,
+  });
+  return reminders.map(withParsedDates);
 }
 
-export function getReminder(
+export async function getReminder(
   reminderId: string,
   props?: ReadonlyArray<keyof Reminder>
 ): Promise<Reminder> {
-  return execJXA(JXA_SCRIPTS.getReminder, { id: reminderId, props });
+  const reminder = await execJXA<Reminder>(JXA_SCRIPTS.getReminder, { id: reminderId, props });
+  return withParsedDates(reminder);
 }
 
 export function updateReminder(id: string, data: Partial<Reminder>): Promise<string> {

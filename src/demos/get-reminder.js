@@ -11,7 +11,7 @@ const reminders = require('../../build/main/index');
     const lastReminder = reminderList[reminderList.length - 1];
     const reminder = await reminders.getReminder(
       lastReminder.id, //
-      ['name', 'remindMeDate', 'completed']
+      ['name', 'remindMeDate', 'completed', 'priority']
     );
     console.log(reminder);
   } catch (e) {

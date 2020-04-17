@@ -18,7 +18,7 @@ export const JXA_SCRIPTS = {
   updateReminder: jxaPath('update-reminder'),
 };
 
-export async function execJXA<T, R>(scriptPath: string, data?: R): Promise<T> {
+export async function execJXA<T, R = {}>(scriptPath: string, data?: R): Promise<T> {
   const prefix = process.env.NODE_ENV === 'test' ? 'test' : '';
 
   const { stderr } = await execa(prefix + 'osascript', [
@@ -29,4 +29,24 @@ export async function execJXA<T, R>(scriptPath: string, data?: R): Promise<T> {
   ]);
 
   return JSON.parse(stderr);
+}
+
+/**
+ * Takes an object and return an equivalent object with string dates converted to Date objects
+ */
+export function withParsedDates<T extends { readonly [key: string]: any }>(data: T): T {
+  const dateProps: ReadonlyArray<any> = [
+    'completionDate',
+    'creationDate',
+    'dueDate',
+    'modificationDate',
+    'remindMeDate',
+  ];
+  const final = Object.keys(data).reduce((obj, prop) => {
+    const isDate = dateProps.indexOf(prop) !== -1;
+    const val = data[prop];
+    const newObj = { ...obj, [prop]: isDate ? new Date(val) : val };
+    return newObj;
+  }, {});
+  return final as T;
 }
