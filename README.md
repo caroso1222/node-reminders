@@ -77,7 +77,7 @@ Creates a reminder in a list and resolves with its ID. See [example](#create-rem
 
 # Examples
 
-## List management
+## List
 
 #### Get Lists
 
@@ -130,7 +130,7 @@ import { createList } from 'node-reminders';
 
 *Note: List deletion is not supported. It's simply not allowed either via `.jxa` or `.applescript` directly.*
 
-## Reminders management
+## Reminders
 
 #### Get reminders
 
