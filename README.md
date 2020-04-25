@@ -1,4 +1,8 @@
 # node-reminders
+[![npm version](https://badge.fury.io/js/node-reminders.svg)](https://badge.fury.io/js/node-reminders)
+[![Build Status](https://travis-ci.com/caroso1222/node-reminders.svg?branch=master)](https://travis-ci.com/caroso1222/node-reminders)
+[![codecov](https://codecov.io/gh/caroso1222/node-reminders/branch/master/graph/badge.svg)](https://codecov.io/gh/caroso1222/node-reminders)
+
 
 A NodeJS and TypeScript wrapper for the macOS Reminders App.
 
