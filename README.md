@@ -10,7 +10,6 @@ A NodeJS and TypeScript wrapper for the macOS Reminders App.
 - 👾 CommonJS and ES6 modules
 - 🤖 Typings available
 - 🎩 JXA-based communication with the Reminders App
-- 🏄‍♂️ Fully unit tested
 
 # Installation
 
